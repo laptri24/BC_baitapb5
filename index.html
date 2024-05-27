@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <!-- tuyển sinh  -->
+    <div class="container mt-5">
+      <h1 class="text-center">Quản lý tuyển sinh</h1>
+      <form id="admissionForm" class="mt-4">
+        <div class="form-group">
+          <label for="Toan">Điểm môn 1:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="Toan"
+            name="Toan"
+            min="0"
+            max="10"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Ly">Điểm môn 2:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="Ly"
+            name="Ly"
+            min="0"
+            max="10"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="Hoa">Điểm môn 3:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="Hoa"
+            name="Hoa"
+            min="0"
+            max="10"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="region">Khu vực:</label>
+          <select class="form-control" id="region" name="region">
+            <option value="0">Chọn khu vực</option>
+            <option value="2">Khu vực 1</option>
+            <option value="1">Khu vực 2</option>
+            <option value="0">Khu vực 3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="priority">Đối tượng ưu tiên:</label>
+          <select class="form-control" id="priority" name="priority">
+            <option value="0">Chọn đối tượng</option>
+            <option value="2">Đối tượng 1</option>
+            <option value="1">Đối tượng 2</option>
+            <option value="0">Đối tượng 3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="standardScore">Điểm chuẩn:</label>
+          <select class="form-control" id="standardScore" name="standardScore">
+            <option value="30">30</option>
+            <option value="29">29</option>
+            <option value="25">25</option>
+          </select>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="calculateResult()"
+        >
+          Tính kết quả
+        </button>
+      </form>
+      <h2 id="result" class="mt-4 text-center"></h2>
+    </div>
+
+    <h2 id="result"></h2>
+
+    <!-- tính tiền thuế thu nhập  -->
+
+    <div class="container">
+      <h1 class="text-center">Tính Thuế Thu Nhập Cá Nhân</h1>
+
+      <div class="section header text-center">
+        <h3>Nhập Dữ Liệu</h3>
+      </div>
+
+      <div class="section">
+        <form id="taxForm" class="mt-4">
+          <div class="form-group">
+            <label for="name">Họ và Tên:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Nhập họ và tên"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="income">Tổng Thu Nhập Năm (VNĐ):</label>
+            <input
+              type="number"
+              class="form-control"
+              id="income"
+              placeholder="Nhập tổng thu nhập năm"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="dependents">Số Người Phụ Thuộc:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="dependents"
+              placeholder="Nhập số người phụ thuộc"
+              required
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-block"
+            onclick="calculateTax()"
+          >
+            Tính Thuế
+          </button>
+        </form>
+      </div>
+
+      <div class="section result">
+        <h3 class="text-center">Kết Quả</h3>
+        <p id="taxResult" class="text-center">
+          Thuế thu nhập cá nhân phải nộp sẽ hiển thị ở đây.
+        </p>
+      </div>
+    </div>
+
+    <!-- tính tiền cap -->
+    <div class="container">
+      <h1 class="text-center">Tính Tiền Cáp</h1>
+
+      <div class="section header text-center">
+        <h3>Nhập Dữ Liệu</h3>
+      </div>
+
+      <div class="section">
+        <form id="cableForm" class="mt-4">
+          <div class="form-group">
+            <label for="customerType">Loại Khách Hàng:</label>
+            <select
+              class="form-control"
+              id="customerType"
+              onchange="toggleConnections()"
+              required
+            >
+              <option value="">Chọn loại khách hàng</option>
+              <option value="nhadan">Nhà Dân</option>
+              <option value="doanhnghiep">Doanh Nghiệp</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="customerCode">Mã Khách Hàng:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="customerCode"
+              placeholder="Nhập mã khách hàng"
+              required
+            />
+          </div>
+          <div class="form-group" id="connectionsDiv" style="display: none">
+            <label for="connections">Số Kết Nối:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="connections"
+              min="0"
+              placeholder="Nhập số kết nối"
+            />
+          </div>
+          <div class="form-group">
+            <label for="premiumChannels">Số Kênh Cao Cấp:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="premiumChannels"
+              min="0"
+              placeholder="Nhập số kênh cao cấp"
+              required
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary btn-block"
+            onclick="calculateCableBill()"
+          >
+            Tính Tiền
+          </button>
+        </form>
+      </div>
+
+      <div class="section result">
+        <h3 class="text-center">Kết Quả</h3>
+        <p id="billResult" class="text-center">
+          Tiền cáp phải trả sẽ hiển thị ở đây.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
